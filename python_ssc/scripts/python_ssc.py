@@ -2,6 +2,7 @@ import asyncio
 import gi
 import threading
 import argparse
+import logging
 
 gi.require_version("Qrtr", "1.0")
 gi.require_version("Qmi", "1.0")
@@ -22,6 +23,15 @@ from ..SSCPressureSensor import PressureAccuracy, SSCPressureSensor
 from ..SSCCompassSensor import SSCCompassSensor, CompassAccuracy
 from ..SSCClient import SSCClient
 from ..SSCTestSensor import SSCTestSensor
+
+
+LOG_MAP = {
+    "DEBUG": logging.DEBUG,
+    "INFO": logging.INFO,
+    "WARNING": logging.WARNING,
+    "ERROR": logging.ERROR,
+    "CRITICAL": logging.CRITICAL,
+}
 
 
 async def on_light(intensity: float, accuracy: LightAccuracy):
@@ -98,7 +108,20 @@ async def main():
         required=False,
         type=int,
     )
+
+    parser.add_argument(
+        "--log_level",
+        default="INFO",
+        help="Log level to use",
+        required=False,
+        type=str,
+        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+    )
+
     args = parser.parse_args()
+
+    log_level = LOG_MAP[args.log_level]
+    logging.basicConfig(level=log_level)
 
     main_loop = GLib.MainLoop()
     loop_thread = threading.Thread(target=main_loop.run)
