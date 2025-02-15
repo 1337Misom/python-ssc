@@ -1,0 +1,2 @@
+recursive-include python_ssc/scripts *
+recursive-include python_ssc/protobufs *.py
