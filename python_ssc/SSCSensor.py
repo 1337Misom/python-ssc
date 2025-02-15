@@ -1,7 +1,5 @@
 import asyncio
 import logging
-import protobufs.ssc_sensor_suid_pb2 as ssc_sensor_suid
-import protobufs.ssc_common_pb2 as ssc_common
 
 from dataclasses import dataclass, field
 from .SSCClient import SSCClient
@@ -23,6 +21,8 @@ from .const import (
     SSC_MSG_REQUEST_ENABLE_REPORT_ON_CHANGE,
     SSC_MSG_REQUEST_ENABLE_REPORT_CONTINUOUS,
 )
+from .protobufs import ssc_sensor_suid_pb2 as ssc_sensor_suid
+from .protobufs import ssc_common_pb2 as ssc_common
 
 
 LOG = logging.getLogger("SSCSensor")
