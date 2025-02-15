@@ -23,7 +23,7 @@ from ..SSCPressureSensor import PressureAccuracy, SSCPressureSensor
 from ..SSCCompassSensor import SSCCompassSensor, CompassAccuracy
 from ..SSCClient import SSCClient
 from ..SSCTestSensor import SSCTestSensor
-
+from ..const import LOG_FORMAT
 
 LOG_MAP = {
     "DEBUG": logging.DEBUG,
@@ -121,7 +121,7 @@ async def main():
     args = parser.parse_args()
 
     log_level = LOG_MAP[args.log_level]
-    logging.basicConfig(level=log_level)
+    logging.basicConfig(level=log_level, format=LOG_FORMAT, force=True)
 
     main_loop = GLib.MainLoop()
     loop_thread = threading.Thread(target=main_loop.run)

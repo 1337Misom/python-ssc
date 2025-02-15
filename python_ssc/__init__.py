@@ -1,4 +1,4 @@
 import logging
 from .const import LOG_FORMAT
 
-logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
+logging.basicConfig(format=LOG_FORMAT)
