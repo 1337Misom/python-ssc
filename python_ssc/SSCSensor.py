@@ -6,8 +6,6 @@ import protobufs.ssc_common_pb2 as ssc_common
 from dataclasses import dataclass, field
 from .SSCClient import SSCClient
 from .const import (
-    LOG_LEVEL,
-    LOG_HANDLER,
     SSC_SENSOR_UID_SUID_LOW,
     SSC_SENSOR_UID_SUID_HIGH,
     SSC_MSG_REQUEST_SUID,
@@ -28,8 +26,6 @@ from .const import (
 
 
 LOG = logging.getLogger("SSCSensor")
-LOG.addHandler(LOG_HANDLER)
-LOG.setLevel(LOG_LEVEL)
 
 MAX_RETRIES = 5
 

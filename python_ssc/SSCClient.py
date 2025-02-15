@@ -9,11 +9,9 @@ gi.require_version("Qmi", "1.0")
 
 from gi.repository import GLib, Qrtr, Qmi, Gio
 from .protobufs import ssc_common_pb2 as ssc_common
-from .const import SSC_PROCESSOR_APSS, SSC_SUSPEND_MODE_WAKEUP, LOG_LEVEL, LOG_HANDLER
+from .const import SSC_PROCESSOR_APSS, SSC_SUSPEND_MODE_WAKEUP
 
 LOG = logging.getLogger("SSCClient")
-LOG.addHandler(LOG_HANDLER)
-LOG.setLevel(LOG_LEVEL)
 
 
 class SSCClient:

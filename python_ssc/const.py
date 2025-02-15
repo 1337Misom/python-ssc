@@ -1,12 +1,4 @@
-import logging
-
-LOG_LEVEL = logging.INFO
-
-LOG_FORMATTER = logging.Formatter("[%(name)s][%(levelname)s]: %(message)s")
-LOG_HANDLER = logging.StreamHandler()
-
-LOG_HANDLER.setLevel(LOG_LEVEL)
-LOG_HANDLER.setFormatter(LOG_FORMATTER)
+LOG_FORMAT = "[%(name)s][%(levelname)s]: %(message)s"
 
 SSC_MSG_REQUEST_ENABLE_REPORT_CONTINUOUS = 513
 SSC_MSG_REQUEST_ENABLE_REPORT_ON_CHANGE = 514
