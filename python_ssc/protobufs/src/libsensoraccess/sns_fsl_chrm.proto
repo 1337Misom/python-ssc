@@ -1,0 +1,31 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message sns_fsl_chrm_event {
+    required float heart_rate = 1;
+    required int32 heart_rate_accuracy = 2;
+}
+
+message sns_fsl_chrm_event_config {
+    required sns_fsl_chrm_mode mode = 1;
+}
+
+message sns_fsl_chrm_req_config {
+    optional sns_fsl_chrm_mode mode = 1;
+    optional uint32 period_sec = 2;
+    optional int32 heart_rate_accuracy = 3;
+    optional int32 is_callback = 4;
+}
+
+enum sns_fsl_chrm_msgid {
+    SNS_FSL_CHRM_MSGID_SNS_CHRM_EVENT = 1028;
+    SNS_FSL_CHRM_MSGID_SNS_CHRM_EVENT_CONFIG = 775;
+    SNS_FSL_CHRM_MSGID_SNS_CHRM_REQ_CONFIG = 776;
+}
+
+enum sns_fsl_chrm_mode {
+    CHRM_DISABLE_MODE = 0;
+    CHRM_CONTINOUS_MODE = 1;
+    CHRM_PERIOD_MODE = 2;
+}

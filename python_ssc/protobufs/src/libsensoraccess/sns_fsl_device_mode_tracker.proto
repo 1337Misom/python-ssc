@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+import "sns_device_mode_wear.proto";
+
+message sns_fsl_device_mode_tracker_request {
+    required sns_device_mode_wear mode = 1;
+    required sns_device_state_wear state = 2;
+}
+
+enum sns_fsl_device_mode_tracker_msgid {
+    SNS_FSL_DEVICE_MODE_TRACKER_MSGID_SNS_DEVICE_MODE_TRACKER_REQUEST = 770;
+    SNS_FSL_DEVICE_MODE_TRACKER_MSGID_DEVICE_MODE_TRACKER_EVENT_CONFIG = 775;
+    SNS_FSL_DEVICE_MODE_TRACKER_MSGID_DEVICE_MODE_TRACKER_EVENT = 1028;
+}

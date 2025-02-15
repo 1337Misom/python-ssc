@@ -1,0 +1,61 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message sns_fsl_msl_req {
+    optional debug_cfg debug = 1;
+    message debug_cfg {
+        optional int32 accel = 1;
+    }
+    
+    optional accel_cfg accel = 2;
+    message accel_cfg {
+        optional float sample_rate = 1;
+        optional uint32 batch_period = 2;
+    }
+    
+    optional nudge_cfg nudge = 3;
+    message nudge_cfg {
+        required uint32 interval_in_minute = 1;
+        required uint32 state = 2;
+    }
+}
+
+message sns_fsl_msl_event_config {
+    required uint32 step_im = 1;
+    required uint32 calorie_im = 2;
+    required uint32 second_im = 3;
+    required uint32 nudge = 4;
+}
+
+message sns_fsl_msl_minute_data {
+    required minute_spec prop = 1;
+    message minute_spec {
+        required uint32 step_im = 1;
+        required uint32 calorie_im = 2;
+        required uint32 second_im = 3;
+        required uint32 mdata = 4;
+    }
+    
+    required bytes accum = 2;
+}
+
+message sns_fsl_msl_event {
+    optional uint32 step_calc = 1;
+    optional sns_fsl_msl_minute_data minute = 2;
+    optional uint32 nudge = 3;
+    optional float lifeq_calories = 4;
+}
+
+message sns_fsl_msl_lifeq_control_event {
+    required uint32 controler_type = 1;
+    required bool enable = 2;
+}
+
+enum sns_fsl_msl_sensor_msgid {
+    SNS_FSL_MSL_SENSOR_MSGID_MSL_EVENT = 1028;
+    SNS_FSL_MSL_SENSOR_MSGID_MSL_EVENT_CONFIG = 1029;
+    SNS_FSL_MSL_SENSOR_MSGID_ON_CHANGE_CONFIG = 769;
+    SNS_FSL_MSL_SENSOR_MSGID_REQ = 770;
+    SNS_FSL_MSL_SENSOR_MSGID_LIFEQ_CONTROL = 771;
+}

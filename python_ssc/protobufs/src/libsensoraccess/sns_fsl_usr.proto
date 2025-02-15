@@ -1,0 +1,144 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message sns_fsl_user_permission_config {
+    optional int32 location = 1;
+    optional int32 heart_rate = 2;
+    optional int32 resting_heart_rate = 3;
+    optional int32 sleep_tracking = 4;
+}
+
+message user_sleep_tracking_config {
+    optional int32 hr = 1;
+    optional uint32 hr_dur = 2;
+    optional int32 spo2 = 3;
+    optional uint32 spo2_dur = 4;
+}
+
+message sns_fsl_user_biometric_config {
+    optional uint32 age = 1;
+    optional sns_fsl_gender_type gender = 2;
+    optional uint32 heightInCm = 3;
+    optional uint32 weightInKg = 4;
+    optional sns_fsl_body_position_type hand = 5;
+    optional sns_fsl_distance_unit_type distanceUnit = 6;
+    optional float rhr = 7;
+    optional float bmi = 8;
+    optional float bfp = 9;
+}
+
+message sns_fsl_user_device_info_config {
+    optional string serialno = 1;
+    optional string btmacaddr = 2;
+    optional string wifimacaddr = 3;
+    optional string saltaddr = 4;
+    optional string md5 = 5;
+    optional int32 oncharge = 6;
+}
+
+message sns_fsl_user_location {
+    required uint64 timestamp = 1;
+    required double longitude = 2;
+    required double latitude = 3;
+    required float accuracy = 4;
+    required float ver_accuracy = 5;
+    required float altitude = 6;
+    required float heading = 7;
+}
+
+message sns_fsl_user_locations {
+    repeated sns_fsl_user_location tethers = 1;
+}
+
+message sns_fsl_user_info_req {
+    optional sns_fsl_user_biometric_config usr_info = 1;
+    optional sns_fsl_user_device_info_config dev_info = 2;
+    optional sns_fsl_user_permission_config permission = 3;
+    
+    optional fitness_goal goal = 4;
+    message fitness_goal {
+        optional uint32 step_cnt_resolution = 1;
+        optional uint32 step_cnt = 2;
+        optional uint32 calories_resolution = 3;
+        optional float calories = 4;
+        optional uint32 hr_point = 5;
+        optional double lap_in_cm = 6;
+    }
+    
+    optional tether_gps tether = 5;
+    message tether_gps {
+        optional sns_fsl_user_location loc = 1;
+        optional location_cfg cfg = 2;
+    }
+    
+    optional qxdm_debug qxdm = 6;
+    message qxdm_debug {
+        required int32 level = 1;
+    }
+    
+    optional self_test test = 7;
+    message self_test {
+        optional int32 fsl_all = 1;
+        optional int32 fsl_calo = 2;
+    }
+    
+    optional unix_timestamp time = 8;
+    message unix_timestamp {
+        required uint64 second = 1;
+        required uint32 millisecond = 2;
+        required int32 timezone = 3;
+    }
+    
+    optional user_sleep_tracking_config sleep_cfg = 9;
+    
+    message location_cfg {
+        required uint32 sampling_rate = 1;
+        required uint32 batch_period = 2;
+    }
+}
+
+message sns_fsl_user_event_config {
+    required sns_fsl_user_permission_config permission = 1;
+    required user_sleep_tracking_config sleep_cfg = 2;
+}
+
+message sns_fsl_user_persist_info {
+    required bytes serialno = 1;
+    required bytes btmacaddr = 2;
+    required bytes wifimacaddr = 3;
+    required bytes sku = 4;
+    required bytes ots = 5;
+}
+
+enum sns_fsl_user_msgid {
+    SNS_FSL_USR_MSGID_CONFIG = 768;
+    SNS_FSL_USR_MSGID_GET_CONFIG = 769;
+    SNS_FSL_USR_MSGID_READ_PERSIST_CONFIG = 770;
+    SNS_FSL_USR_MSGID_ON_CHANGE = 1024;
+    SNS_DELETE_MIN_DATA_EVENT = 3071;
+}
+
+enum sns_fsl_body_position_type {
+    FSL_BODY_POSITION_UNSPECIFIED = 0;
+    FSL_BODY_POSITION_LEFT_WRIST = 1;
+    FSL_BODY_POSITION_RIGHT_WRIST = 2;
+    FSL_BODY_POSITION_UNSPECIFIED_WRIST = 3;
+}
+
+enum sns_fsl_gender_type {
+    FSL_GENDER_UNSPECIFIED = 0;
+    FSL_GENDER_MALE = 1;
+    FSL_GENDER_FEMALE = 2;
+}
+
+enum sns_fsl_distance_unit_type {
+    FSL_METRIC = 0;
+    FSL_IMPERIAL = 1;
+}
+
+enum sns_fsl_user_debug_type {
+    FSL_USR_DBG_ERR = 0;
+    FSL_USR_DBG_WARN = 1;
+    FSL_USR_DBG_VERBOSE = 2;
+}

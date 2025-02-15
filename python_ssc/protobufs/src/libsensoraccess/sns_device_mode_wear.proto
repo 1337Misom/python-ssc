@@ -1,0 +1,33 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message sns_device_mode_wear_event {
+    repeated mode_spec device_mode_wear = 1;
+    message mode_spec {
+        required sns_device_mode_wear mode = 1;
+        required sns_device_state_wear state = 2;
+    }
+}
+
+enum sns_device_mode_wear_msgid {
+    SNS_DEVICE_MODE_WEAR_MSGID_SNS_DEVICE_MODE_WEAR_EVENT = 772;
+}
+
+enum sns_device_mode_wear {
+    SNS_DEVICE_MODE_WEAR_UNKNOWN = 0;
+    SNS_DEVICE_MODE_WEAR_FLIP_OPEN = 1;
+    SNS_DEVICE_MODE_WEAR_LOCATION = 2;
+    SNS_DEVICE_MODE_AIRPLANE_MODE = 3;
+    SNS_DEVICE_MODE_WEAR_MICROPHONE = 4;
+    SNS_DEVICE_MODE_WEAR_WIFI_CONNECTIVITY = 5;
+    SNS_DEVICE_MODE_WEAR_WIFI_SCAN = 6;
+    SNS_DEVICE_MODE_WEAR_BLUETOOTH_CONNECTIVITY = 7;
+    SNS_DEVICE_MODE_WEAR_BLUETOOTH_SCAN = 8;
+}
+
+enum sns_device_state_wear {
+    SNS_DEVICE_STATE_WEAR_INACTIVE = 0;
+    SNS_DEVICE_STATE_WEAR_ACTIVE = 1;
+    SNS_DEVICE_STATE_WEAR_UNKNOWN = 2;
+}

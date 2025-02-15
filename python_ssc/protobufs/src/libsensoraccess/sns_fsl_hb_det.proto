@@ -1,0 +1,27 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message sns_fsl_hb_det_event {
+    required uint64 timestamp = 1;
+    required uint32 ppg = 2;
+    required uint32 quality = 3;
+}
+
+message sns_fsl_hb_det_event_config {
+    required uint64 timestamp = 1;
+    required uint32 ppg = 2;
+    required uint32 quality = 3;
+}
+
+message sns_fsl_hb_det_req_config {
+    required uint64 unix_ts_sec = 1;
+    required uint32 force_stop = 2;
+}
+
+enum sns_fsl_hb_det_msgid {
+    SNS_FSL_HB_DET_MSGID_HBD_EVENT = 1028;
+    SNS_FSL_HB_DET_MSGID_HBD_EVENT_CONFIG = 1029;
+    SNS_FSL_HB_DET_SENSOR_MSGID_SET_CONFIG = 767;
+    SNS_FSL_HB_DET_SENSOR_MSGID_ON_CHANGE_CONFIG = 768;
+}

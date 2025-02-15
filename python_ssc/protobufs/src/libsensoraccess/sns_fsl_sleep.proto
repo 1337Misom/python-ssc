@@ -1,0 +1,58 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+import "sns_lifeq_spo2_config.proto";
+
+message sns_fsl_sleep_event {
+    required uint32 state = 1;
+}
+
+message sns_fsl_sleep_event_config {
+    required uint32 state = 1;
+}
+
+message sns_fsl_sleep_req_config {
+    optional uint32 tracking = 1;
+    
+    optional heart_rate_spec heart_rate = 2;
+    message heart_rate_spec {
+        required uint32 tracking = 1;
+        required uint32 period = 2;
+        required int32 accuracy = 3;
+    }
+    
+    optional spo2_spec spo2 = 3;
+    message spo2_spec {
+        required uint32 tracking = 1;
+        required sns_lifeq_spo2_request config = 2;
+    }
+}
+
+message sns_fsl_sleep_detect_event {
+    required uint32 state = 1;
+}
+
+message sns_fsl_sleep_event_detect_config {
+    required uint32 state = 1;
+}
+
+message sns_fsl_sleep_detect_req_config {
+    optional uint32 detect = 1;
+    
+    optional spo2_spec spo2 = 2;
+    message spo2_spec {
+        required uint32 tracking = 1;
+        required uint32 period = 2;
+        required uint32 timeout = 3;
+        required float confidence = 4;
+    }
+}
+
+enum sns_fsl_sleep_msgid {
+    SNS_FSL_SLEEP_MSGID_SNS_SLEEP_EVENT = 1028;
+    SNS_FSL_SLEEP_MSGID_SNS_SLEEP_EVENT_CONFIG = 775;
+    SNS_FSL_SLEEP_MSGID_SNS_SLEEP_REQ = 776;
+    SNS_FSL_SLEEP_DET_MSGID_SNS_SLEEP_DET_EVENT = 2028;
+    SNS_FSL_SLEEP_DET_MSGID_SNS_SLEEP_DET_EVENT_CONFIG = 875;
+    SNS_FSL_SLEEP_DET_MSGID_SNS_SLEEP_DET_REQ = 876;
+}

@@ -1,0 +1,48 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message fsl_hwf_heart_rate_spec {
+    required float bpm = 1;
+    required int32 zone = 2;
+}
+
+message sns_fsl_hwf_event {
+    optional float calories = 1;
+    optional float elevation = 2;
+    optional uint32 step_cnt = 3;
+    optional fsl_hwf_heart_rate_spec heart_rate = 4;
+    optional float spo2 = 5;
+}
+
+message sns_fsl_hwf_event_config {
+    required float calories = 1;
+    required float elevation = 2;
+    required uint32 step_cnt = 3;
+    required fsl_hwf_heart_rate_spec heart_rate = 4;
+    required float spo2 = 6;
+}
+
+message sns_fsl_hwf_req_config {
+    optional hwf_por_config sensor = 1;
+    message hwf_por_config {
+        optional int32 heart_rate = 1;
+        optional int32 elevation = 2;
+        optional int32 spo2 = 3;
+        optional int32 pedometer = 4;
+        optional int32 calorie = 5;
+    }
+    
+    optional hwf_period_config period = 2;
+    message hwf_period_config {
+        required uint32 oc_period = 1;
+        required uint32 hr_period = 2;
+        required uint32 spo2_period = 3;
+    }
+}
+
+enum sns_fsl_hwf_msgid {
+    SNS_FSL_HWF_MSGID_SNS_HWF_EVENT = 1024;
+    SNS_FSL_HWF_MSGID_SNS_HWF_EVENT_CONFIG = 778;
+    SNS_FSL_HWF_MSGID_SNS_HWF_APPS_REQ = 779;
+}

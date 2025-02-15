@@ -1,0 +1,84 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message sns_fsl_wk_event {
+    optional float calories = 1;
+    optional float distance = 2;
+    optional float elevation = 3;
+    
+    optional heart_rate_spec heart_rate = 4;
+    message heart_rate_spec {
+        required float bpm = 1;
+        required int32 zone = 2;
+    }
+    
+    optional int32 location_state = 5;
+    optional float pace = 6;
+    optional uint32 step_cnt = 7;
+    optional bytes buffer = 8;
+    optional double lap_in_cm = 9;
+}
+
+message sns_fsl_wk_config {
+    optional wk_spec workout = 1;
+    message wk_spec {
+        optional sns_fsl_wk_state_type state = 1;
+        optional sns_fsl_wk_activity_type activity = 2;
+        optional int32 sum_dur = 3;
+        optional sns_fsl_wk_discard_type wk_discard = 4;
+    }
+    
+    optional wk_perm permission = 2;
+    message wk_perm {
+        optional int32 heart_rate = 1;
+        optional wk_loc_config location = 2;
+    }
+    
+    message wk_loc_config {
+        optional int32 enable = 1;
+        optional uint32 sampling = 2;
+        optional uint32 batching = 3;
+    }
+}
+
+message sns_fsl_wk_summary_config {
+    required bytes payload = 1;
+}
+
+enum sns_fsl_wk_msgid {
+    SNS_FSL_WORKOUT_MSGID_SNS_WORKOUT_EVENT = 1024;
+    SNS_FSL_WORKOUT_MSGID_SNS_WORKOUT_EVENT_CONFIG = 778;
+    SNS_FSL_WORKOUT_MSGID_SNS_WORKOUT_SUMMARY_EVENT_CONFIG = 779;
+    SNS_FSL_WORKOUT_MSGID_SNS_WORKOUT_ON_CHANGE_CONFIG = 780;
+}
+
+enum sns_fsl_wk_state_type {
+    SNS_FSL_WK_TAG_ACTIVITY_INVALID = 0;
+    SNS_FSL_WK_TAG_ACTIVITY_START = 1;
+    SNS_FSL_WK_TAG_ACTIVITY_RESUME = 2;
+    SNS_FSL_WK_TAG_ACTIVITY_PAUSE = 3;
+    SNS_FSL_WK_TAG_ACTIVITY_STOP = 4;
+    SNS_FSL_WK_TAG_ACTIVITY_AUTO_START = 5;
+}
+
+enum sns_fsl_wk_activity_type {
+    FSL_WK_ACTIVITY_RUNNING = 1;
+    FSL_WK_ACTIVITY_CYCLING = 2;
+    FSL_WK_ACTIVITY_TREADMILL = 3;
+    FSL_WK_ACTIVITY_ELLIPTICAL = 4;
+    FSL_WK_ACTIVITY_WEIGHTS = 5;
+    FSL_WK_ACTIVITY_WORKOUT = 6;
+    FSL_WK_ACTIVITY_YOGA = 7;
+    FSL_WK_ACTIVITY_WALKING = 8;
+    FSL_WK_ACTIVITY_ROWING = 9;
+    FSL_WK_ACTIVITY_SWIMMING = 10;
+    FSL_WK_ACTIVITY_AEROBIC_WORKOUT = 11;
+    FSL_WK_ACTIVITY_HIKING = 12;
+    FSL_WK_ACTIVITY_SPINNING = 13;
+}
+
+enum sns_fsl_wk_discard_type {
+    FSL_WK_DO_NOT_DISCARD = 0;
+    FSL_WK_DISCARD = 1;
+}

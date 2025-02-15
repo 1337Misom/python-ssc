@@ -1,0 +1,33 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+import "sns_fsl_chrm.proto";
+
+message wellness_sensor_config {
+    optional sleep_config sleep = 1;
+    message sleep_config {
+        required bool tracking = 1;
+        required bool heart_rate = 2;
+    }
+    
+    optional workout_config workout = 2;
+    message workout_config {
+        required bool heart_rate = 1;
+        required bool location = 2;
+    }
+    
+    optional rhr_config rhr = 3;
+    message rhr_config {
+        required bool tracking = 1;
+    }
+    
+    optional chrm_config chrm = 4;
+    message chrm_config {
+        required int32 mode = 1;
+    }
+    
+    optional spo2_config spo2 = 5;
+    message spo2_config {
+        required bool spo2 = 1;
+    }
+}

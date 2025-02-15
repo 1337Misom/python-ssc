@@ -1,0 +1,88 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message sns_fsl_actrec_event {
+    required sns_fsl_actrec_state_config state = 1;
+    required uint32 activity = 2;
+    required float prob = 3;
+}
+
+message sns_fsl_actrec_workout_event {
+    required sns_fsl_actrec_state_config state = 1;
+    required uint32 activity = 2;
+    required float prob = 3;
+    required uint32 steps = 4;
+    required double calories = 5;
+    required double distances_km = 6;
+    required uint32 latency = 7;
+}
+
+message sns_fsl_actrec_automic_event {
+    required sns_fsl_actrec_automic_type type = 1;
+}
+
+message sns_fsl_actrec_phys_config {
+    required uint32 period_sec = 1;
+}
+
+message sns_fsl_actrec_config {
+    optional algo_config start_stop_algo_cfg = 1;
+    message algo_config {
+        required uint32 activity = 1;
+        required uint32 latency = 2;
+        required float threshold = 3;
+    }
+    
+    optional algo_config pause_algo_cfg = 2;
+    optional algo_config resume_algo_cfg = 3;
+    
+    optional state_config state = 4;
+    message state_config {
+        required uint32 state = 1;
+        required uint32 second = 2;
+    }
+}
+
+message sns_fsl_actrec_configs {
+    repeated sns_fsl_actrec_config config = 1;
+}
+
+message sns_fsl_actrec_apr_config {
+    required sns_fsl_actrec_apr_state state = 1;
+}
+
+enum sns_fsl_actrec_msgid {
+    SNS_FSL_ACTREC_MSGID_ACTREC_EVENT = 1029;
+    SNS_FSL_ACTREC_MSGID_ACTREC_AUTOMIC_EVENT = 1030;
+    SNS_FSL_ACTREC_MSGID_ACTREC_WORKOUT_AUTO_START_STOP_EVENT = 1031;
+    SNS_FSL_ACTREC_SENSOR_MSGID_SET_CONFIG = 767;
+    SNS_FSL_ACTREC_SENSOR_MSGID_ON_CHANGE_CONFIG = 768;
+    SNS_FSL_ACTREC_SENSOR_MSGID_FORCE_STOP = 769;
+    SNS_FSL_ACTREC_SENSOR_MSGID_CLEAN_CONFIG = 770;
+    SNS_FSL_ACTREC_SENSOR_MSGID_PHYS_CONFIG = 771;
+    SNS_FSL_ACTREC_SENSOR_MSGID_CONTROL_APR_ALGO = 772;
+}
+
+enum sns_fsl_actrec_state_config {
+    FSL_ACTREC_STATE_UNKNOWN = 100;
+    FSL_ACTREC_STATE_START = 101;
+    FSL_ACTREC_STATE_STOP = 102;
+    FSL_ACTREC_STATE_PAUSE = 103;
+    FSL_ACTREC_STATE_RESUME = 104;
+    FSL_ACTREC_STATE_AUTO_PAUSE = 110;
+    FSL_ACTREC_STATE_AUTO_RESUME = 111;
+}
+
+enum sns_fsl_actrec_automic_type {
+    FSL_ACTREC_AUTOMATIC_UNKNOWN = 0;
+    FSL_ACTREC_AUTOMATIC_PAUSE_DETECTED = 1;
+    FSL_ACTREC_AUTOMATIC_RESUME_DETECTED = 2;
+}
+
+enum sns_fsl_actrec_apr_state {
+    FSL_ACTREC_APR_UNKNOWN = 0;
+    FSL_ACTREC_APR_START_AUTO_PAUSE_ALGO = 1;
+    FSL_ACTREC_APR_START_AUTO_RESUME_ALGO = 2;
+    FSL_ACTREC_APR_STOP_ALL = 3;
+}

@@ -1,0 +1,14 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message sns_lifeq_spo2_request {
+    required bool is_continuous = 1;
+    required float timeout_seconds = 2;
+    required float timeoutBetweenMeasurements_seconds = 3;
+    required float confidence_threshold_percentage = 4;
+}
+
+enum sns_lifeq_spo2_request_msg_id {
+    SNS_LIFEQ_SPO2_CONFIG = 5336;
+}

@@ -1,0 +1,34 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message sns_fsl_min_event {
+    required bytes buffer = 1;
+    required uint32 transaction_id = 2;
+    required int32 eof = 3;
+    required int32 eop = 4;
+}
+
+message sns_fsl_min_client_req {
+    optional sns_fsl_min_client_req_id msg_id = 1;
+    
+    optional unix_timestamp time = 2;
+    message unix_timestamp {
+        required uint64 second = 1;
+        required uint32 millisecond = 2;
+        required int32 timezone = 3;
+    }
+}
+
+enum sns_fsl_min_msgid_type {
+    SNS_FSL_MIN_SENSOR_MSGID_MIN_EVENT = 1028;
+    SNS_FSL_MIN_SENSOR_MSGID_MIN_EVENT_CONFIG = 1029;
+    SNS_FSL_MIN_SENSOR_MSGID_MIN_ACK = 1030;
+    SNS_FSL_MIN_SENSOR_MSGID_APPS_REQ = 768;
+    SNS_FSL_MIN_SENSOR_MSGID_RECORD_CONFIG = 769;
+}
+
+enum sns_fsl_min_client_req_id {
+    GET_MINUTE_LOG = 1;
+    DELETE_MINUTE_LOG = 2;
+}

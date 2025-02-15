@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+import "sns_device_mode_wear.proto";
+
+message sns_fsl_formatter_dvm_request {
+    required sns_device_mode_wear mode = 1;
+    required sns_device_state_wear state = 2;
+}
+
+enum sns_fsl_formatter_tracker_msgid {
+    SNS_FSL_FORMATTER_TRACKER_MSGID_SNS_FORMATTER_DVM_REQUEST = 770;
+}

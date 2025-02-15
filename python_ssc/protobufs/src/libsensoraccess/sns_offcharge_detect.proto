@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message sns_offcharge_detect_event {
+    required sns_offcharge_detect_event_type state = 1 [default = SNS_OFFCHARGE_DETECT_EVENT_TYPE_UNKNOWN];
+}
+
+enum sns_offcharge_detect_msgid {
+    SNS_OFFCHARGE_DETECT_MSGID_SNS_OFFCHARGE_DETECT_EVENT = 772;
+}
+
+enum sns_offcharge_detect_event_type {
+    SNS_OFFCHARGE_DETECT_EVENT_TYPE_UNKNOWN = 0;
+    SNS_OFFCHARGE_DETECT_EVENT_TYPE_ON = 1;
+    SNS_OFFCHARGE_DETECT_EVENT_TYPE_OFF = 2;
+}

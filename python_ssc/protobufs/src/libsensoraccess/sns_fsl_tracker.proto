@@ -1,0 +1,36 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+import "sns_lifeq_spo2_config.proto";
+
+message sns_fsl_tracker_request {
+    required sns_fsl_tracker_request_ids msg_id = 1;
+    required sns_fsl_tracker_request_states state = 2;
+    required bytes payload = 3;
+}
+
+message sns_fsl_tracker_event_config {
+    required sns_fsl_tracker_request_states spo2 = 1;
+    required sns_fsl_tracker_request_states rhr = 2;
+}
+
+enum sns_fsl_tracker_msgid {
+    SNS_FSL_TRACKER_MSGID_TRACKER_EVENT = 1028;
+    SNS_FSL_TRACKER_MSGID_TRACKER_EVENT_CONFIG = 1029;
+    SNS_FSL_TRACKER_MSGID_TRACKER_REQUEST = 768;
+}
+
+enum sns_fsl_tracker_request_ids {
+    SNS_FSL_TRACKER_REQUEST_INVALID = 0;
+    SNS_FSL_TRACKER_READ_TRACKER = 1;
+    SNS_FSL_TRACKER_REQUEST_SPO2 = 2;
+    SNS_FSL_TRACKER_REQUEST_RHR = 3;
+}
+
+enum sns_fsl_tracker_request_states {
+    SNS_FSL_TRACKER_REQUEST_STATE_INVALID = 0;
+    SNS_FSL_TRACKER_REQUEST_STATE_START = 1;
+    SNS_FSL_TRACKER_REQUEST_STATE_STOP = 2;
+    SNS_FSL_TRACKER_REQUEST_STATE_PAUSE = 3;
+    SNS_FSL_TRACKER_REQUEST_STATE_RESUME = 4;
+}

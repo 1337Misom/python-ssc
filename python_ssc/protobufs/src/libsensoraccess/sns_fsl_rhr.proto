@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message sns_fsl_rhr_event {
+    required float rhr = 1;
+}
+
+message sns_fsl_rhr_event_config {
+    required float rhr = 1;
+}
+
+message sns_fsl_rhr_req_msg {
+    required float percentile_thres = 1;
+    required uint32 step_thres = 2;
+    required uint32 period_thres = 3;
+    required int32 hr_quality_thres = 4;
+}
+
+enum sns_fsl_rhr_msgid {
+    SNS_FSL_RHR_MSGID_SNS_RHR_EVENT = 1028;
+    SNS_FSL_RHR_MSGID_SNS_RHR_EVENT_CONFIG = 1029;
+    SNS_FSL_RHR_MSGID_SNS_RHR_REQ_CONFIG = 778;
+    SNS_FSL_RHR_MSGID_SNS_RHR_ON_CHANGE_CONFIG = 779;
+}

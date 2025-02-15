@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61.0", "pip>=23.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["python_ssc"]
+
+[project]
+name = "python_ssc"
+version = "0.0.1"
+description = "Program/Library to read sensor values using Qualcomm's SSC bus"
+authors = [{ name = "1337Misom" }]
+
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE.txt" }
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+]
+
+dependencies = ["protobuf", "PyGObject"]
+
+[project.urls]
+"Homepage" = "https://github.com/1337Misom/python-ssc"
+
+[project.scripts]
+python-ssc = "python_ssc.scripts.python_ssc:main_sync"

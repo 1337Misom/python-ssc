@@ -1,0 +1,49 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message fsl_lifeq_lel_user_profile {
+    required float gender_maleAs1_femaleAs2_UnknownAs3 = 1;
+    required float age_years = 2;
+    required float height_m = 3;
+    required float weight_kg = 4;
+    required float maxHeartRate_bpm = 5;
+    required float restingHeartRate_bpm = 6;
+    required float bodyFat_percentage = 7;
+    required float vo2max_ml_pkg_pmin = 8;
+    required float vo2min_ml_pkg_pmin = 9;
+    required float timeZone_minutes = 10;
+    required float current_unixTime_seconds = 11;
+    required float ott_test_mode_logging = 12;
+    required float enable_clc_config = 13;
+}
+
+message fsl_lifeq_lel_simulate_motion_test_type_config {
+    required fsl_lifeq_lel_simulate_motion_test_type type = 1;
+}
+
+message fsl_lifeq_lel_spo2_request {
+    required bool is_continuous = 1;
+    required float timeout_seconds = 2;
+    required float timeoutBetweenMeasurements_seconds = 3;
+    required float confidence_threshold_percentage = 4;
+}
+
+enum fsl_lifeq_lel_user_profile_msg_id {
+    FSL_LIFEQ_LEL_USER_PROFILE_CONFIG = 5333;
+}
+
+enum fsl_lifeq_lel_test_motion_type_msg_id {
+    FSL_LIFEQ_LEL_TEST_MOTION_TYPE = 5335;
+}
+
+enum fsl_lifeq_lel_simulate_motion_test_type {
+    LIFEQ_LEL_TEST_NO_TEST = 0;
+    LIFEQ_LEL_TEST_NO_MOTION = 1;
+    LIFEQ_LEL_TEST_LOW_MOTION = 2;
+    LIFEQ_LEL_TEST_HIGH_MOTION = 3;
+}
+
+enum fsl_lifeq_lel_spo2_request_msg_id {
+    FSL_LIFEQ_LEL_SPO2_CONFIG = 5336;
+}

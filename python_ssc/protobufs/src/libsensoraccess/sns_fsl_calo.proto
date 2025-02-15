@@ -1,0 +1,22 @@
+syntax = "proto2";
+
+import "nanopb.proto";
+
+message sns_fsl_calo_event {
+    required float calories = 1;
+}
+
+message sns_fsl_calo_event_config {
+    required float calories = 1;
+}
+
+message sns_fsl_calo_req_config {
+    optional uint32 period = 1;
+    optional float vo2max = 2;
+}
+
+enum sns_fsl_calo_msgid {
+    SNS_FSL_CALO_MSGID_SNS_CALO_EVENT = 1028;
+    SNS_FSL_CALO_MSGID_SNS_CALO_EVENT_CONFIG = 775;
+    SNS_FSL_CALO_MSGID_SNS_CALO_REQ_CONFIG = 776;
+}

@@ -1,0 +1,71 @@
+/*
+ * libssc: Library to expose Qualcomm Sensor Core sensors
+ * Copyright (C) 2022-2025 Dylan Van Assche
+ * Copyright (C) 2025 1337Misom
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+syntax = "proto2";
+// Resting heart rate sync id: 5337
+// Resting heart rate reset: 5338
+// User profile config: 5333
+// Start measurement: 5336
+
+/*
+ * Accelerometer Sensor specific response data.
+ * @spo2: [0]: blood oxygen saturation (0-100) [1]: confidence [2]: Algorithm state [3]: Signal state
+ * @accuracy: how reliable the value is [0, 3]. Higher is more accurate, 0 is unreliable.
+ */
+message SscLifeqSPo2Response {
+	repeated float spo2 = 1;
+	required int32 accuracy = 2;
+}
+
+message SscLifeqSPo2UserProfile {
+    // 1: Male 2: Female 3: Unknown
+    required float gender = 1;
+    required float age = 2; // in years
+    required float height = 3; // in meters
+    required float weight = 4; // in kg
+    required float maxHeartRate = 5; // in BPM
+    required float restingHeartRate = 6; // in BPM
+    required float bodyFat = 7; // in %
+    required float vo2max = 8; // in ml/(kg*min)
+    required float vo2min = 9; // in ml/(kg*min)
+    required float timeZone = 10; // in min
+    required float unixTime = 11; // in seconds
+    // 0: no logging 1: debug 2: input raw acc and ppg 3: input raw acc and ppg 4: input and resampled raw acc and ppg logging
+    required float testLogging = 12;
+
+    // if enable_clc = 0 (enable_clc_config)
+    // if enable_clc = 1 (enable_clc_config)
+    required float enableCLC = 13;
+}
+
+
+message SscLifeqSPo2Request {
+    // true: periodic or 100% duty cycle
+    // false: read until timeout or threshold
+    required bool continuous = 1;
+
+    required float timeout = 2; // in seconds (15-120)
+
+    // Seconds between readings 0 for continuous
+    required float measurementSpacing = 3; // in seconds
+
+    required float confidenceThreshold = 4; // Value from 85%-99%
+}
+
+message SscLifeqRHRsyncRequest {
+    required uint32 restingBPM = 1; // resting BPM
+}
