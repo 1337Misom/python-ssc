@@ -179,7 +179,7 @@ async def main():
 
         await sensor.enable()
 
-    print(f"Sleeping for {args.duration}")
+    print(f"Sleeping for {args.duration} seconds")
     await asyncio.sleep(args.duration)
     GLib.idle_add(main_loop.quit)
 
