@@ -2,7 +2,7 @@
 Developed to test sensor on Qualcomm based smartwatches for AsteroidOS. Some things were taken from [`libssc`](https://codeberg.org/DylanVanAssche/libssc)
 
 ## Requirements
-- Install `libqrtr`, `python3-protobuf`
+- Install `libqrtr`, `python3-protobuf` and `PyGObject`
 - Build `libqmi` with `qrtr` support
 
 ## Reverse Engineering
