@@ -12,9 +12,6 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-import protobufs.ssc_common_pb2 as ssc__common__pb2
-
-
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
     b'\n\x15ssc-sensor-suid.proto\x1a\x10ssc-common.proto"X\n\x0eSscSuidRequest\x12\x11\n\tdata_type\x18\x01 \x02(\t\x12\x16\n\x0e\x65nable_updates\x18\x02 \x01(\x08\x12\x1b\n\x13only_default_values\x18\x03 \x01(\x08":\n\x0fSscSuidResponse\x12\x11\n\tdata_type\x18\x01 \x02(\t\x12\x14\n\x03uid\x18\x02 \x03(\x0b\x32\x07.SscUid'
 )
