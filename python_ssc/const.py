@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 LOG_FORMAT = "[%(name)s][%(levelname)s]: %(message)s"
 
 SSC_MSG_REQUEST_ENABLE_REPORT_CONTINUOUS = 513
